@@ -36,16 +36,27 @@ def get_de_muc(
     )
 
 
-@log_function
-@router.get("/all-tree", response_model=BaseResponse[Any])
-def get_all_tree(
-    de_muc_id: Optional[str] = None,
-    db: Session = Depends(get_db),
-    user=Depends(get_current_user),
-):
-    """Lấy toàn bộ cấu trúc cây hoặc lọc theo de_muc_id"""
-    data = service.get_all_tree(db, de_muc_id=de_muc_id)
-    return BaseResponse(success=True, message="Lấy cấu trúc cây thành công", data=data)
+# @log_function
+# @router.get("/all-tree", response_model=BaseResponse[Any])
+# def get_all_tree(
+#     de_muc_id: Optional[str] = None,
+#     chu_de_id: Optional[str] = None,
+#     mapc: Optional[str] = None,
+#     page: int = 1,
+#     page_size: int = 50,
+#     db: Session = Depends(get_db),
+#     user=Depends(get_current_user),
+# ):
+#     """Lấy cấu trúc cây với phân trang hoặc lọc theo de_muc_id, chu_de_id, mapc"""
+#     data = service.get_all_tree(
+#         db,
+#         de_muc_id=de_muc_id,
+#         chu_de_id=chu_de_id,
+#         mapc=mapc,
+#         page=page,
+#         page_size=page_size,
+#     )
+#     return BaseResponse(success=True, message="Lấy cấu trúc cây thành công", data=data)
 
 
 @log_function

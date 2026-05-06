@@ -41,31 +41,51 @@ def get_de_muc(db: Session, chu_de_id: str = None):
         )
 
 
-@log_function
-def get_all_tree(db: Session, de_muc_id: str = None):
-    """Lấy cấu trúc cây, có thể lọc theo đề mục"""
-    sql = "SELECT id, chi_muc, mapc, ten, chu_de_id, de_muc_id FROM all_tree"
-    params = {}
-    if de_muc_id:
-        sql += " WHERE de_muc_id = :de_muc_id"
-        params["de_muc_id"] = de_muc_id
+# @log_function
+# def get_all_tree(
+#     db: Session,
+#     de_muc_id: str = None,
+#     chu_de_id: str = None,
+#     mapc: str = None,
+#     page: int = 1,
+#     page_size: int = 50,
+# ):
+#     """Lấy cấu trúc cây với phân trang và lọc"""
+#     sql = "SELECT id, chi_muc, mapc, ten, chu_de_id, de_muc_id FROM all_tree"
+#     conditions = []
+#     params = {"limit": page_size, "offset": (page - 1) * page_size}
 
-    query = text(sql)
-    try:
-        result = db.execute(query, params).fetchall()
-        return [
-            {
-                "id": row[0],
-                "chi_muc": row[1],
-                "mapc": row[2],
-                "ten": row[3],
-                "chu_de_id": row[4],
-                "de_muc_id": row[5],
-            }
-            for row in result
-        ]
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Lỗi lấy cấu trúc cây: {str(e)}")
+#     if de_muc_id:
+#         conditions.append("de_muc_id = :de_muc_id")
+#         params["de_muc_id"] = de_muc_id
+#     if chu_de_id:
+#         conditions.append("chu_de_id = :chu_de_id")
+#         params["chu_de_id"] = chu_de_id
+#     if mapc:
+#         conditions.append("mapc = :mapc")
+#         params["mapc"] = mapc
+
+#     if conditions:
+#         sql += " WHERE " + " AND ".join(conditions)
+
+#     sql += " LIMIT :limit OFFSET :offset"
+
+#     query = text(sql)
+#     try:
+#         result = db.execute(query, params).fetchall()
+#         return [
+#             {
+#                 "id": row[0],
+#                 "chi_muc": row[1],
+#                 "mapc": row[2],
+#                 "ten": row[3],
+#                 "chu_de_id": row[4],
+#                 "de_muc_id": row[5],
+#             }
+#             for row in result
+#         ]
+#     except Exception as e:
+#         raise HTTPException(status_code=500, detail=f"Lỗi lấy cấu trúc cây: {str(e)}")
 
 
 @log_function
