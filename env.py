@@ -7,9 +7,8 @@ logger.info("Loading environment variables...")
 
 DATA_PIPELINE_PHAP_DIEN_DATABASE_URL = env.str("DATA_PIPELINE_PHAP_DIEN_DATABASE_URL")
 DATABASE_URL = DATA_PIPELINE_PHAP_DIEN_DATABASE_URL
-
 SERVICE_NAME = "data-pipeline-phapdien-service"
-PORT = env.int("SERVICE_PORT", 30000)
+PORT = env.int("SERVICE_PORT", 51001)
 
 
 ENVIRONMENT = env.str("ENVIRONMENT", "production")
